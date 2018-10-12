@@ -6,15 +6,15 @@
 <div id="conteudo" style="margin-top: -30px;">
     <div class="row">
         <!-- ./col -->
-        <div class="col-lg-12 col-xs-6">
+        <div class="col-lg-12 col-xs-12">
           <!-- small box -->
           <center>
           <div class="small-box" style="background:#007a64; color: white">
             <div class="inner">
-              <center><h2>Gerenciador de Funcionários</h2></center>              
+              <center><h2>Gerenciador de Funcionario</h2></center>              
                 <h4>
                     <div align="right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=" .bd-example-modal-lg">Incluir Funcionário</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="      .bd-example-modal-lg">Incluir Funcionário</button>
                     </div>
                 </h4>
             </div>
@@ -28,36 +28,37 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
+            <div class="pull-right">
             <!-- Modal -->
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br>
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 
                 <form action="{{ route('funcionarios.store') }}" method="POST">
                     @csrf
-                    <div class="container box box-success">
-                <br>
-                <div class="row">
-                    <div class="col-md-4">
-                        <strong>Nome do Novo Funcionário:</strong>
-                            <input type="text" name="nome_funcionario" class="form-control" placeholder="Digite o nome..." required="ON">
+                        <div class="container box box-success">
+                        <br>
+                    <div class="row">
+                            <div class="col-md-4">
+                                <strong>Nome do Novo Funcionário:</strong>
+                                    <input type="text" name="nome_funcionario" class="form-control" placeholder="Digite o nome..." required="ON">
+                            </div>
+                 
+                            <div class="col-md-4">
+                                <strong>Matricula do Novo Funcionário:</strong>
+                                    <input type="text" name="matricula" class="form-control" placeholder="Digite o nome..." required="ON">
+                            </div>
+                 
+                            <div class="col-md-4">
+                                <strong>Ele é instrutor?</strong>
+                                    <select name="instrutor" class="form-control" required="ON">
+                                    <option value="">Clique aqui</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Nao">Não</option>
+                                    <select>   
+                            </div>
                     </div>
-         
-                    <div class="col-md-4">
-                        <strong>Email do Novo Funcionário:</strong>
-                            <input type="email" name="email_funcionario" class="form-control" placeholder="Digite o nome..." required="ON">
-                    </div>
-         
-                    <div class="col-md-4">
-                        <strong>Ele é instrutor?</strong>
-                            <select name="instrutor" class="form-control" required="ON">
-                            <option value="">Clique aqui</option>
-                            <option value="Sim">Sim</option>
-                            <option value="Nao">Não</option>
-                            <select>   
-                    </div>
-                </div>
 
                 <br>
 
@@ -94,7 +95,11 @@
                             @endforeach               
                             </select>   
                         </div>
-                    </div>  
+                    </div> 
+
+                    <br>
+
+
                     <br>
                     <div class="row">
                         <div class="col-md-12">
@@ -129,82 +134,108 @@
             </div>
             </div> 
         </div>
+        </div>
     </div>
 
     <head>
-    
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+        <script src="js/jquery.min.js" type="text/javascript"></script>
 
-        <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
-        <script type="text/javascript" class="init">
-
-            $(document).ready(function() {
-            $('#tobarril').DataTable({
-                    "language": {
-                    "lengthMenu": "Visualizando _MENU_  itens por página",
-                    "zeroRecords": "Item não encontrado",
-                    "info": "Visualizando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Nenhum item a ser exibido",
-                    "infoFiltered": "(Filtrado from _MAX_ total records)"
-                        }
-                    } 
-                );
-            } );
-        </script>
-
+        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/dataTables.bootstrap.min.js" type="text/javascript"></script>      
+        <link  href="css/dataTables.bootstrap.min.css" rel="stylesheet"></link>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>     
     </head>
 
-        <table id="tobarril" class="table table-bordered"> 
-         
+    <table id="funcionarios_table" class="table table-bordered" style="width:100%">
         <thead>
         <tr>
-            <th><center>N°</center></th>
+            <th width="10px"><center>Matricula</center></th>
             <th><center>Nome</center></th>
             <th><center>Instrutor</center></th>
             <th><center>Cargo</center></th>
             <th><center>Setor</center></th>
             <th><center>Departamento</center></th>
-            <th><center>Situação</center></th>
-            <th width="150px"><center>Ação</center></th>
+            <th width="20px"><center>Situação</center></th>
+            <th width="115px"><center>Ações</center></th>
         </tr>
         </thead>
-        @foreach ($funcionarios as $funcionario)
-        <tbody>
-        <tr>
-            <td><center>{{ $funcionario->id }}</center></td>
-            <td><center>{{ $funcionario->nome_funcionario }}</center></td>
-            <td><center>{{ $funcionario->instrutor }}</center></td>
-            <td><center>{{ $funcionario->cargo->nome_cargo }}</center></td> 
-            <td><center>{{ $funcionario->cetor->nome_cetor }}</center></td>
-            <td><center>{{ $funcionario->departamento->nome_departamento }}</center></td>
-            <td><center>{{ $funcionario->situacao }}</center></td>
-            <td>
-                <center>
-                <form action="{{ route('funcionarios.destroy',$funcionario->id) }}" method="POST" onsubmit="return confirm ('Tem certeza que deseja excluir o Funcionário selecionado?')">
-
-                
- 
-                    <a class="btn btn-primary" href="{{ route('funcionarios.edit',$funcionario->id) }}">Editar</a>
-
-
-                    @csrf
-                    @method('DELETE')
-
-   
-                    <button type="submit" class="btn btn-danger">Deletar</button>
-                </form>
-            </center>
-            </td>
-        </tr>
-        </tbody>
-        @endforeach
     </table>
 
+    <!--Centralização das variáveis do datatable-->
+    <style type="text/css">
+        .uniqueClassName {
+        text-align: center;
+    }
+    /*Adicionar: , className: "uniqueClassName" após a variável;
+    </style>
 
-   {!! $funcionarios->links() !!}
+<script type="text/javascript">
+    $(document).ready(function(){
+         $('#funcionarios_table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax":"{{ route('funcionario.getdata') }}",
+            "columns":[
+                { "data":  "matricula", className: "uniqueClassName" },
+                { "data":  "nome_funcionario", className: "uniqueClassName"},
+                { "data":  "instrutor", className: "uniqueClassName"},
+                { "data":  "cargos_id", className: "uniqueClassName"},
+                { "data":  "cetors_id", className: "uniqueClassName"},
+                { "data":  "departamentos_id", className: "uniqueClassName"},
+                { "data":  "situacao", className: "uniqueClassName"},
+                { "data":  "action", orderable:false, searchable: false, className: "uniqueClassName"}
+
+            ],
+            "language":{
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página — <b>Tabela</b>: Funcionários",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                }            
+         });    
+    });
+
+$(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+        if(confirm("Tem certeza que deseja deletar este funcionário?"))
+        {
+            $.ajax({
+                url:"{{route('funcionario.destroy')}}",
+                mehtod:"get",
+                data:{id:id},
+                success:function(data)
+                {
+                    alert(data);
+                    $('#funcionarios_table').DataTable().ajax.reload();
+                }
+            })
+        }
+        else
+        {
+            return false;
+        }
+    }); 
 
 
+</script>
 @endsection
+
+
+

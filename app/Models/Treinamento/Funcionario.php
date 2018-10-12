@@ -10,12 +10,13 @@ class Funcionario extends Model
 {
     protected $fillable = [
     	'nome_funcionario', 
-    	'email_funcionario', 
-    	'instrutor', 
+    	'matricula',
+        'instrutor', 
         'situacao',
     	'cargos_id',
     	'cetors_id',
     	'departamentos_id',
+        
     ];     
 
     use SoftDeletes;

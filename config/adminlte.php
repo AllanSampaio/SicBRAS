@@ -32,7 +32,7 @@ return [
 
     'logo' => '<img src="img/sicbrasPB.png" style="width:150px;">',
 
-    'logo_mini' => '<img src="/img/sicbrasPBSimbolo.png" style="width:30px;">',
+    'logo_mini' => '<img src="img/sicbrasPBSimbolo.png" style="width:30px;">',
 
     /*
     |--------------------------------------------------------------------------

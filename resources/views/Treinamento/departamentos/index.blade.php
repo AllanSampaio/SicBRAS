@@ -6,7 +6,7 @@
 <div id="conteudo" style="margin-top: -30px;">
     <div class="row">
         <!-- ./col -->
-        <div class="col-lg-12 col-xs-6">
+        <div class="col-lg-12 col-xs-12">
           <!-- small box -->
           <center>
           <div class="small-box" style="background:#007a64; color: white">
@@ -14,7 +14,7 @@
               <center><h2>Gerenciador de Departamentos</h2></center>              
                 <h4>
                     <div align="right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=" .bd-example-modal-lg">Incluir Departamento</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="     .bd-example-modal-lg" >Incluir Departamento</button>
                     </div>
                 </h4>
             </div>
@@ -25,11 +25,11 @@
 </div>
 @stop
 
-
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
+            <!-- Modal -->
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
               <div class="modal-dialog modal-lg">
@@ -51,7 +51,7 @@
                             <div class="col-md-4">
                                 <strong> </strong>
                                 <button type="submit" class="btn btn-sic btn-success btn-block btn-flat ">Enviar</button>
-                            </div>
+                        </div>
                         </div>
                         <br>
                     </div>
@@ -62,71 +62,94 @@
             </div>
         </div>
     </div>
-
-<head>
     
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <head>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
 
-        <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
-        <script type="text/javascript" class="init">
-
-            $(document).ready(function() {
-            $('#tobarril').DataTable({
-                    "language": {
-                    "lengthMenu": "Visualizando _MENU_  itens por página",
-                    "zeroRecords": "Item não encontrado",
-                    "info": "Visualizando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No records available",
-                    "infoFiltered": "(Filtrado from _MAX_ total records)"
-                        }
-                    } 
-                );
-            } );
-        </script>
-
+        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/dataTables.bootstrap.min.js" type="text/javascript"></script>      
+        <link  href="css/dataTables.bootstrap.min.css" rel="stylesheet"></link>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>     
     </head>
-    <table id="tobarril" class="table table-bordered" border="1" bgcolor="#ffffff">
+
+    <table id="departamentos_table" class="table table-bordered" style="width:100%">
         <thead>
         <tr>
             <th><center>N°</center></th>
-            <th><center>Nome</center></th>
-            <th width="150px"><center>Ação</center></th>
+            <th><center>Nome do Departamento</center></th>            
+            <th><center>Ações</center></th>            
+            
         </tr>
         </thead>
-        @foreach ($departamentos as $departamento)
-        <tbody>
-        <tr>
-            <td><center>{{ $departamento->id }}</center></td>
-            <td><center>{{ $departamento->nome_departamento }}</center></td>
-            <td>
-                <center>
-                <form action="{{ route('departamentos.destroy',$departamento->id) }}" method="POST" onsubmit="return confirm ('Tem certeza que deseja excluir o Departamento selecionado?')">
-
-                    <!-- OPÇÃO DE VER ITEM 
-                    <a class="btn btn-info" href="{{ route('departamentos.show',$departamento->id) }}">Ver</a>
-                    -->
- 
-                    <a class="btn btn-primary" href="{{ route('departamentos.edit',$departamento->id) }}">Editar</a>
-
-
-                    @csrf
-                    @method('DELETE')
-
-   
-                    <button type="submit" class="btn btn-danger">Deletar</button>
-                </form>
-            </center>
-            </td>
-        </tr>
-        </tbody>
-        @endforeach
     </table>
 
+    <!--Centralização das variáveis do datatable-->
+    <style type="text/css">
+        .uniqueClassName {
+        text-align: center;
+    }
+    /*Adicionar: , className: "uniqueClassName" após a variável;
+    </style>
 
-    {!! $departamentos->links() !!}
+<script type="text/javascript">
+    $(document).ready(function(){
+         $('#departamentos_table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax":"{{ route('departamento.getdata') }}",
+            "columns":[
+                { "data":  "id", className: "uniqueClassName" },
+                { "data":  "nome_departamento", className: "uniqueClassName"},
+                { "data": "action", orderable:false, searchable: false, className: "uniqueClassName"}
+
+            ],
+            "language":{
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página — <b>Tabela</b>: Departamentos",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                }            
+         });    
+    });
 
 
+    $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+        if(confirm("Tem certeza que deseja deletar este Departamento?"))
+        {
+            $.ajax({
+                url:"{{route('departamento.destroy')}}",
+                mehtod:"get",
+                data:{id:id},
+                success:function(data)
+                {
+                    alert(data);
+                    $('#departamentos_table').DataTable().ajax.reload();
+                }
+            })
+        }
+        else
+        {
+            return false;
+        }
+    }); 
+
+</script>
 @endsection

@@ -8,34 +8,54 @@ $this->group(['middleware' => ['auth'], 'namespace' => 'Estoque'], function(){
     
 
 $this->group(['middleware' => ['auth'], 'namespace' => 'Treinamento'], function(){
-
     
+    /* Rotas de: Cargo */
     Route::resource('cargos','CargoController'); 
     Route::get('cargo', 'CargoController@index')->name('cargo');
     Route::get('cargo/getdata', 'CargoController@getdata')->name('cargo.getdata');
-    Route::get('cargo/contato', 'CargoController@contato')->name('cargo.contato');
-    /*Route::get('cargo/edit', 'CargoController@edit')->name('cargo.edit');
-    Route::get('cargo/update', 'CargoController@update')->name('cargo.update');
-    Route::get('cargo/destroy', 'CargoController@destroy')->name('cargo.destroy');*/
-    
-  
+    Route::get('cargo/destroy', 'CargoController@destroy')->name('cargo.destroy');
+
+    /* Rotas de: Setor */
+    Route::resource('cetors','CetorController'); 
+    Route::get('cetor', 'CetorController@index')->name('cetor');
+    Route::get('cetor/getdata', 'CetorController@getdata')->name('cetor.getdata');
+    Route::get('cetor/destroy', 'CetorController@destroy')->name('cetor.destroy');
+       
+    /* Rotas de: Departamento */
+    Route::resource('departamentos','DepartamentoController'); 
+    Route::get('departamento', 'DepartmentoController@index')->name('departamento');
+    Route::get('departamento/getdata', 'DepartamentoController@getdata')->name('departamento.getdata');
+    Route::get('departamento/destroy', 'DepartamentoController@destroy')->name('departamento.destroy');
+
+    /* Rotas de: Curso */
+    Route::resource('cursos','CursoController'); 
+    Route::get('curso', 'CursoController@index')->name('curso');
+    Route::get('curso/getdata', 'CursoController@getdata')->name('curso.getdata');
+    Route::get('curso/destroy', 'CursoController@destroy')->name('curso.destroy');
+
+    /* Rotas de: TpTreinamento */
+    Route::resource('tptreinamentos','TpTreinamentoController');
+    Route::get('tptreinamento', 'TpTreinamentoController@index')->name('tptreinamento');
+    Route::get('tptreinamento/getdata', 'TpTreinamentoController@getdata')->name('tptreinamento.getdata');
+    Route::get('tptreinamento/destroy', 'TpTreinamentoController@destroy')->name('tptreinamento.destroy');
+
+    /* Rotas de: EspecTreinamento */    
+    Route::resource('espectreinamentos','EspecTreinamentoController');
+    Route::get('espectreinamento', 'EspecTreinamentoController@index')->name('espectreinamento');
+    Route::get('espectreinamento/getdata', 'EspecTreinamentoController@getdata')->name('espectreinamento.getdata');
+    Route::get('espectreinamento/destroy', 'EspecTreinamentoController@destroy')->name('espectreinamento.destroy');
+
+    /* Rotas de: Funcionario */
+    Route::resource('funcionarios','FuncionarioController');
+    Route::get('funcionario', 'FuncionarioController@index')->name('funcionario');
+    Route::get('funcionario/getdata', 'FuncionarioController@getdata')->name('funcionario.getdata');
+    Route::get('funcionario/destroy', 'FuncionarioController@destroy')->name('funcionario.destroy');
+
 
     /* ROTAS MENU DO MÓDULO DE TREINAMENTO*/
     Route::resource('treinamento', 'TreinamentoController');
     Route::resource('help', 'HelpController');
     Route::resource('gerenciador', 'GerenciadorController');
-
-    /* ROTAS DE GERENCIAR ITENS */
-    
-     
-    Route::resource('cetors','CetorController');
-    Route::resource('espectreinamentos','EspecTreinamentoController');
-    Route::resource('tptreinamentos','TpTreinamentoController');
-    Route::resource('departamentos','DepartamentoController');
-    Route::resource('funcionarios','FuncionarioController');
-    //Route::resource('cursos','CursoController');
-
-    
 
     /* ROTA DE CADASTRAR TURMA */
 
@@ -63,6 +83,7 @@ Route::resource('home', 'HomeController');
 Route::get('/', function () {
     return view('welcome');
 });  
+
 
   
 

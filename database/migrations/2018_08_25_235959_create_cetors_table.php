@@ -15,7 +15,7 @@ class CreateCetorsTable extends Migration
     {
         Schema::create('cetors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome_cetor')->unique();
+            $table->string('nome_cetor');
 
             $table->softDeletes();
 

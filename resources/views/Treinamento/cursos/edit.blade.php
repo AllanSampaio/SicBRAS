@@ -11,7 +11,7 @@
           <center>
           <div class="small-box" style="background:#007a64; color: white">
             <div class="inner">
-              <center><h2>Editor de Nome da Tabela Cursos</h2></center>              
+              <center><h2>Editor de Nome da Tabela Treinamento</h2></center>              
                 <h4>
                     <div align="right">
                     <a class="btn btn-primary" href="{{ route('cursos.index') }}">Voltar</a>

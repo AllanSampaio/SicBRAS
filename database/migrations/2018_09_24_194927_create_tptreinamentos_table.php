@@ -15,7 +15,7 @@ class CreateTptreinamentosTable extends Migration
     {
         Schema::create('tptreinamentos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome_tptreinamento')->unique();
+            $table->string('nome_tptreinamento');
                         
             $table->softDeletes();
             $table->timestamps();

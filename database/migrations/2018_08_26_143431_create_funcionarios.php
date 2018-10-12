@@ -16,7 +16,6 @@ class CreateFuncionarios extends Migration
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome_funcionario');
-            $table->string('email_funcionario')->unique();
             $table->string('instrutor');
             $table->string('situacao');
 
@@ -28,7 +27,10 @@ class CreateFuncionarios extends Migration
             
             $table->integer('departamentos_id')->unsigned();
             $table->foreign('departamentos_id')->references('id')->on('departamentos');
-            
+
+
+            $table->integer('matricula')->unique();
+
 
             
 

@@ -5,37 +5,38 @@ namespace App\Http\Controllers\Treinamento;
 use App\Models\Treinamento\TpTreinamento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DataTables;
 
 class TpTreinamentoController extends Controller{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $tptreinamentos = TpTreinamento::latest()->paginate(10);
-
-        return view('treinamento.tptreinamentos.index',compact('tptreinamentos'))
-            ->with('i', (request()->input('page', 1 ) -1) * 5);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+        return view('treinamento.tptreinamentos.index');  
+             
+            }
+    public function getdata()
     {
-        return view('treinamento.tptreinamentos.create');
+        $tptreinamentos = \App\Models\Treinamento\TpTreinamento::all(); 
+        
+
+        return Datatables::of($tptreinamentos)
+        ->addColumn('action', function ($tptreinamento) {
+                return '<a href="tptreinamentos/'.$tptreinamento->id.'/edit " class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                    <a href="#" class="btn btn-xs btn-danger delete" id="'.$tptreinamento->id.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                    })
+                    ->editColumn('id', 'ID: {{$id}}')
+                    ->removeColumn('password')
+                    ->make(true);
+            }
+    function destroy(Request $request)
+    {
+        $tptreinamento = TpTreinamento::find($request->input('id'));
+        if($tptreinamento->delete())
+        {
+            echo 'Tipo de Treinamento deletado com Sucesso';
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate([
@@ -49,41 +50,22 @@ class TpTreinamentoController extends Controller{
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(TpTreinamento $tptreinamento)
     {
         return view('treinamento.tptreinamentos.show',compact('tptreinamento'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
     public function edit(TpTreinamento $tptreinamento)
     {
         return view('treinamento.tptreinamentos.edit',compact('tptreinamento'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, TpTreinamento $tptreinamento)
     {
         request()->validate([
             'nome_tptreinamento' => 'required',
         ]);
-
 
         $tptreinamento->update($request->all());
 
@@ -91,17 +73,5 @@ class TpTreinamentoController extends Controller{
                     ->with('success', 'Tipo de Treinamento Atualizado com Sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TpTreinamento $tptreinamento)
-    {
-        $tptreinamento->delete();
 
-        return redirect()->route('tptreinamentos.index')
-                        ->with('success', 'Tipo de Treinamento Deletado com Sucesso!');
-    }
 }

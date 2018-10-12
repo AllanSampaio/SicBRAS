@@ -14,7 +14,7 @@
               <center><h2>Editor de Nome da Tabela Tipo de Treinamento</h2></center>              
                 <h4>
                     <div align="right">
-                    <a class="btn btn-primary" href="">Voltar</a>
+                    <a class="btn btn-primary" href="{{ route('tptreinamentos.index') }}">Voltar</a>
                     </div>
                 </h4>
             </div>
@@ -41,7 +41,7 @@
     @endif
 
 
-    <form action="" method="POST">
+    <form action="{{ route('tptreinamentos.update',$tptreinamento->id) }}" method="POST">
         @csrf
         @method('PUT')
 

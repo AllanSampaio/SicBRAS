@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Treinamento;
 use App\Models\Treinamento\Cetor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DataTables;
 
 class CetorController extends Controller{
     /**
@@ -14,20 +15,31 @@ class CetorController extends Controller{
      */
     public function index()
     {
-        $cetors = Cetor::latest()->paginate(10);
-
-        return view('treinamento.cetors.index',compact('cetors'))
-            ->with('i', (request()->input('page', 1 ) -1) * 5);
+      return view('treinamento.cetors.index');  
+     
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getdata()
     {
-        return view('treinamento.cetors.create');
+        $cetors = \App\Models\Treinamento\Cetor::all(); 
+
+        return Datatables::of($cetors)
+            ->addColumn('action', function ($cetor) {
+                return '<a href="cetors/'.$cetor->id.'/edit " class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                        <a href="#" class="btn btn-xs btn-danger delete" id="'.$cetor->id.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+            })
+            ->editColumn('id', 'ID: {{$id}}')
+            ->removeColumn('password')
+            ->make(true);
+    }
+    
+    function destroy(Request $request)
+    {
+        $cetor = Cetor::find($request->input('id'));
+        if($cetor->delete())
+        {
+            echo 'Setor deletado com Sucesso';
+        }
     }
 
     /**
@@ -97,11 +109,5 @@ class CetorController extends Controller{
      * @param  \App\Cetor  $cetor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cetor $cetor)
-    {
-        $cetor->delete();
 
-        return redirect()->route('cetors.index')
-                        ->with('success', 'Setor Deletado com Sucesso!');
-    }
 }

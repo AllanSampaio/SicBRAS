@@ -6,7 +6,7 @@
 <div id="conteudo" style="margin-top: -30px;">
     <div class="row">
         <!-- ./col -->
-        <div class="col-lg-12 col-xs-6">
+        <div class="col-lg-12 col-xs-12">
           <!-- small box -->
           <center>
           <div class="small-box" style="background:#007a64; color: white">
@@ -14,7 +14,7 @@
               <center><h2>Gerenciador de Cargos</h2></center>              
                 <h4>
                     <div align="right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="     .bd-example-modal-lg" >Opções</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="     .bd-example-modal-lg" >Incluir Cargo</button>
                     </div>
                 </h4>
             </div>
@@ -24,8 +24,6 @@
       <div class="box box-success" style="position: relative; left: 0px; top: 0px;">
 </div>
 @stop
-
-
 
 @section('content')
     <div class="row">
@@ -37,7 +35,7 @@
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 
-                <form action="{{ route('cargos.store') }}" method="POST">
+                <form name="teste" action="{{ route('cargos.store') }}" method="POST">
                     @csrf
                     <div class="container box box-success">        
                         <br>
@@ -65,25 +63,35 @@
         </div>
     </div>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>       
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>        
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <!--<link  href="css/bootstrap.min.css" rel="stylesheet"></link>-->
+        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/dataTables.bootstrap.min.js" type="text/javascript"></script>      
+        <link  href="css/dataTables.bootstrap.min.css" rel="stylesheet"></link>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>     
     </head>
     <table id="cargos_table" class="table table-bordered" style="width:100%">
         <thead>
         <tr>
-            <th><center>Id</center></th>
-            <th><center>Nome do Cargo</center></th>
-            <th><center>Ações</center></th>
-            
-            
+            <th><center>N°</center></th>
+            <th><center>Nome do Cargo</center></th>            
+            <th><center>Ações</center></th>            
             
         </tr>
         </thead>
     </table>
+
+    <!--Centralização das variáveis do datatable-->
+    <style type="text/css">
+        .uniqueClassName { 
+        text-align: center;
+    }
+    /*Adicionar: , className: "uniqueClassName" após a variável;
+    </style>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"></script>
+    
     <script type="text/javascript">
     $(document).ready(function(){
          $('#cargos_table').DataTable({
@@ -91,10 +99,9 @@
             "serverSide": true,
             "ajax":"{{ route('cargo.getdata') }}",
             "columns":[
-                { "data":  "id" },
-                { "data":  "nome_cargo"},
-                { "data":"action","searchable":false,"orderable":false}
-
+                { "data":  "id", className: "uniqueClassName"},
+                { "data":  "nome_cargo", className: "uniqueClassName"},
+                { "data": "action", orderable:false, searchable: false, className: "uniqueClassName"}
 
             ],
             "language":{
@@ -104,7 +111,7 @@
                     "sInfoFiltered": "(Filtrados de _MAX_ registros)",
                     "sInfoPostFix": "",
                     "sInfoThousands": ".",
-                    "sLengthMenu": "_MENU_ resultados por página — <b>Tabela</b>: Cargo",
+                    "sLengthMenu": "_MENU_ resultados por página — <b>Tabela</b>: Cargos",
                     "sLoadingRecords": "Carregando...",
                     "sProcessing": "Processando...",
                     "sZeroRecords": "Nenhum registro encontrado",
@@ -119,9 +126,32 @@
                         "sSortAscending": ": Ordenar colunas de forma ascendente",
                         "sSortDescending": ": Ordenar colunas de forma descendente"
                     }
+
                 }            
          });    
     });
+
+    $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+        if(confirm("Tem certeza que deseja deletar este Cargo?"))
+        {
+            $.ajax({
+                url:"{{route('cargo.destroy')}}",
+                mehtod:"get",
+                data:{id:id},
+                success:function(data)
+                {
+                    alert(data);
+                    $('#cargos_table').DataTable().ajax.reload();
+                }
+            })
+        }
+        else
+        {
+            return false;
+        }
+    }); 
+
 
     
     </script>

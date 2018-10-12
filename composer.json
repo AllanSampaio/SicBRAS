@@ -16,7 +16,8 @@
         "yajra/laravel-datatables-editor": "^1.5",
         "yajra/laravel-datatables-fractal": "1.*",
         "yajra/laravel-datatables-html": "3.*",
-        "yajra/laravel-datatables-oracle": "8.*"
+        "yajra/laravel-datatables-oracle": "8.*",
+        "khill/lavacharts" : "3.0.*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

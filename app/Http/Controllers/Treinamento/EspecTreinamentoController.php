@@ -5,103 +5,66 @@ namespace App\Http\Controllers\Treinamento;
 use App\Models\Treinamento\EspecTreinamento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DataTables;
 
 class EspecTreinamentoController extends Controller{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $espectreinamentos = EspecTreinamento::latest()->paginate(10);
-
-        return view('treinamento.espectreinamentos.index',compact('espectreinamentos'))
-            ->with('i', (request()->input('page', 1 ) -1) * 5);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('treinamento.espectreinamentos.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+            public function index()
+                {
+                  return view('treinamento.espectreinamentos.index');  
+             
+            }
+            public function getdata()
+            {
+                $espectreinamentos = \App\Models\Treinamento\EspecTreinamento::all(); 
+        
+                return Datatables::of($espectreinamentos)
+                    ->addColumn('action', function ($espectreinamento) {
+                        return '<a href="espectreinamentos/'.$espectreinamento->id.'/edit " class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                                <a href="" class="btn btn-xs btn-danger delete" id="'.$espectreinamento->id.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                    })
+                    ->editColumn('id', 'ID: {{$id}}')
+                    ->removeColumn('password')
+                    ->make(true);
+            }
+            function destroy(Request $request)
+            {
+                $espectreinamento = EspecTreinamento::find($request->input('id'));
+                if($espectreinamento->delete())
+                {
+                    echo 'Especificação de Treinamento deletado com Sucesso';
+                }
+            }
     public function store(Request $request)
-    {
-        request()->validate([
-            'nome_espectreinamento' => 'required',
+        {
+            request()->validate([
+                'nome_espectreinamento' => 'required',
         ]);
+            EspecTreinamento::create($request->all());
 
-        EspecTreinamento::create($request->all());
-
-        return redirect()->route('espectreinamentos.index')
+            return redirect()->route('espectreinamentos.index')
                     ->with('success', 'Especificação de Treinamento cadastrado com sucesso!');
-
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(EspecTreinamento $espectreinamento)
-    {
-        return view('treinamento.espectreinamentos.show',compact('espectreinamento'));
+        {
+            return view('treinamento.espectreinamentos.show',compact('espectreinamento'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
     public function edit(EspecTreinamento $espectreinamento)
-    {
-        return view('treinamento.espectreinamentos.edit',compact('espectreinamento'));
+        {
+            return view('treinamento.espectreinamentos.edit',compact('espectreinamento'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, EspecTreinamento $espectreinamento)
     {
-        request()->validate([
+            request()->validate([
             'nome_espectreinamento' => 'required',
         ]);
+            $espectreinamento->update($request->all());
 
-
-        $espectreinamento->update($request->all());
-
-        return redirect()->route('espectreinamentos.index')
+            return redirect()->route('espectreinamentos.index')
                     ->with('success', 'Especificação de Treinamento Atualizado com Sucesso!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Tptreinamento  $tptreinamento
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(EspecTreinamento $espectreinamento)
-    {
-        $espectreinamento->delete();
-
-        return redirect()->route('espectreinamentos.index')
-                        ->with('success', 'Especificação de Treinamento Deletado com Sucesso!');
-    }
+    }           
 }
+
+

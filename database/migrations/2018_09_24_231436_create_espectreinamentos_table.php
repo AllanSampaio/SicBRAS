@@ -15,7 +15,7 @@ class CreateEspectreinamentosTable extends Migration
     {
         Schema::create('espectreinamentos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome_espectreinamento')->unique();
+            $table->string('nome_espectreinamento');
             $table->softDeletes();
             $table->timestamps();
         });

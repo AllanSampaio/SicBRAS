@@ -15,7 +15,7 @@ class CreateCargosTable extends Migration
     {
         Schema::create('cargos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome_cargo')->unique();
+            $table->string('nome_cargo');
 
             $table->softDeletes();
 
