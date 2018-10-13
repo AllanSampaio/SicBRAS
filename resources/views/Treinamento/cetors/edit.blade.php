@@ -30,7 +30,7 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>OPA!</strong>Houve um Problema na entrada de Dados.<br><br>
+            <strong>OPA! </strong>Houve um problema na entrada de dados.<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -48,9 +48,9 @@
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Digite um novo Nome para o Setor abaixo:</strong>
+                    <strong>Digite um novo nome para o setor:</strong>
                     <br><br>
-                    <input type="text" name="nome_cetor" value="{{ $cetor->nome_cetor }}" class="form-control" placeholder="Digite aqui o novo nome">
+                    <input type="text" name="nome_cetor" value="{{ $cetor->nome_cetor }}" class="form-control" placeholder="Digite aqui o novo nome do setor..." maxlength="80">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

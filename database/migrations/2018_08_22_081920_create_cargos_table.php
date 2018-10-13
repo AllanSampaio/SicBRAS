@@ -14,11 +14,11 @@ class CreateCargosTable extends Migration
     public function up()
     {
         Schema::create('cargos', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->string('nome_cargo');
+            $table->string('nome_cargo',80)->unique();
 
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

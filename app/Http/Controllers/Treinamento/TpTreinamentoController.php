@@ -33,7 +33,7 @@ class TpTreinamentoController extends Controller{
         $tptreinamento = TpTreinamento::find($request->input('id'));
         if($tptreinamento->delete())
         {
-            echo 'Tipo de Treinamento deletado com Sucesso';
+            echo 'Tipo de Treinamento deletado com sucesso!';
         }
     }
 
@@ -70,7 +70,7 @@ class TpTreinamentoController extends Controller{
         $tptreinamento->update($request->all());
 
         return redirect()->route('tptreinamentos.index')
-                    ->with('success', 'Tipo de Treinamento Atualizado com Sucesso!');
+                    ->with('success', 'Tipo de Treinamento atualizado com sucesso!');
     }
 
 

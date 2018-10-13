@@ -38,7 +38,7 @@ class CetorController extends Controller{
         $cetor = Cetor::find($request->input('id'));
         if($cetor->delete())
         {
-            echo 'Setor deletado com Sucesso';
+            echo 'Setor deletado com sucesso!';
         }
     }
 
@@ -100,7 +100,7 @@ class CetorController extends Controller{
         $cetor->update($request->all());
 
         return redirect()->route('cetors.index')
-                    ->with('success', 'Setor Atualizado com Sucesso!');
+                    ->with('success', 'Setor atualizado com sucesso!');
     }
 
     /**

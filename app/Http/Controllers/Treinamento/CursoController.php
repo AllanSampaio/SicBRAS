@@ -32,7 +32,7 @@ class CursoController extends Controller{
         $curso = Curso::find($request->input('id'));
         if($curso->delete())
         {
-            echo 'Curso deletado com Sucesso';
+            echo 'Curso deletado com sucesso!';
         }
     }
 
@@ -65,7 +65,7 @@ class CursoController extends Controller{
             $curso->update($request->all());
 
             return redirect()->route('cursos.index')
-                    ->with('success', 'Curso Atualizado com Sucesso!');
+                    ->with('success', 'Curso atualizado com sucesso!');
     }           
     
 

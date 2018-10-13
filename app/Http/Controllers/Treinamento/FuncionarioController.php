@@ -34,7 +34,7 @@ class FuncionarioController extends Controller{
         $funcionario = Funcionario::find($request->input('id'));
         if($funcionario->delete())
         {
-            echo 'Funcionaro deletado com Sucesso';
+            echo 'Funcionário deletado com sucesso!';
         }
     }
 
@@ -46,7 +46,7 @@ class FuncionarioController extends Controller{
             Funcionario::create($request->all());
 
             return redirect()->route('funcionarios.index')
-                    ->with('success', 'Cargo cadastrado com sucesso!');
+                    ->with('success', 'Funcionário cadastrado com sucesso!');
     } 
 
     public function show(Funcionario $funcionario)
@@ -69,7 +69,7 @@ class FuncionarioController extends Controller{
         $funcionario->update($request->all());
 
         return redirect()->route('funcionarios.index')
-                    ->with('success', 'Funcionario Atualizado com Sucesso!');
+                    ->with('success', 'Funcionário atualizado com sucesso!');
     }
 
 }

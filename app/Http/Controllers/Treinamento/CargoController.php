@@ -32,7 +32,7 @@ class CargoController extends Controller{
         $cargo = Cargo::find($request->input('id'));
         if($cargo->delete())
         {
-            echo 'Cargo deletado com Sucesso';
+            echo 'Cargo deletado com sucesso!';
         }
     }
 
@@ -65,7 +65,7 @@ class CargoController extends Controller{
             $cargo->update($request->all());
 
             return redirect()->route('cargos.index')
-                    ->with('success', 'Cargo Atualizado com Sucesso!');
+                    ->with('success', 'Cargo atualizado com sucesso!');
     }           
     
 

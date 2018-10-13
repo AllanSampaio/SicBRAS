@@ -49,12 +49,12 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nome:</strong>
-                    <input type="text" name="nome_funcionario" value="{{ $funcionario->nome_funcionario }}" class="form-control" placeholder="Digite aqui o novo nome">
+                    <input type="text" name="nome_funcionario" value="{{ $funcionario->nome_funcionario }}" class="form-control" placeholder="Digite aqui o novo nome" maxlength="80">
                 </div>
                 
                 <div class="form-group">
-                    <strong>Email:</strong>
-                    <input type="text" name="email_funcionario" value="{{ $funcionario->email_funcionario }}" class="form-control" placeholder="Digite aqui o novo nome">
+                    <strong>Matrícula:</strong>
+                    <input type="number" max="99999"  name="matricula" value="{{ $funcionario->matricula }}" class="form-control" placeholder="Digite aqui a nova matrícula">
                 </div>
                 
                 <div class="form-group">

@@ -14,7 +14,7 @@
               <center><h2>Gerenciador de Tipos de Treinamento</h2></center>              
                 <h4>
                     <div align="right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="     .bd-example-modal-lg" >Incluir Tipo de Treinamento</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg" >Incluir Tipo de Treinamento</button>
                     </div>
                 </h4>
             </div>
@@ -45,7 +45,7 @@
                     <div class="row">
                             <div class="col-md-4">
                                 <strong>Nome do Novo Tipo de Treinamento:</strong>
-                                <input type="text" name="nome_tptreinamento" class="form-control" placeholder="Digite o nome..." required="ON">
+                                <input type="text" name="nome_tptreinamento" class="form-control" placeholder="Digite o nome..." required="ON" maxlength="80">
                             </div>
                             <div class="col-md-4">
                                 <strong> </strong>
@@ -135,7 +135,7 @@
 
     $(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
-        if(confirm("Tem certeza que deseja deletar este Tipo de Treinamento?"))
+        if(confirm("Tem certeza que deseja deletar este tipo de treinamento?"))
         {
             $.ajax({
                 url:"{{route('tptreinamento.destroy')}}",

@@ -11,10 +11,10 @@
           <center>
           <div class="small-box" style="background:#007a64; color: white">
             <div class="inner">
-              <center><h2>Gerenciador de Funcionario</h2></center>              
+              <center><h2>Gerenciador de Funcionários</h2></center>              
                 <h4>
                     <div align="right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="      .bd-example-modal-lg">Incluir Funcionário</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">Incluir Funcionário</button>
                     </div>
                 </h4>
             </div>
@@ -42,12 +42,12 @@
                     <div class="row">
                             <div class="col-md-4">
                                 <strong>Nome do Novo Funcionário:</strong>
-                                    <input type="text" name="nome_funcionario" class="form-control" placeholder="Digite o nome..." required="ON">
+                                    <input type="text" name="nome_funcionario" class="form-control" placeholder="Digite o nome..." required="ON" maxlength="80">
                             </div>
                  
                             <div class="col-md-4">
-                                <strong>Matricula do Novo Funcionário:</strong>
-                                    <input type="text" name="matricula" class="form-control" placeholder="Digite o nome..." required="ON">
+                                <strong>Matrícula do Novo Funcionário:</strong>
+                                    <input type="number" max="99999" name="matricula" class="form-control" placeholder="Digite a matrícula..." required="ON">
                             </div>
                  
                             <div class="col-md-4">
@@ -149,7 +149,7 @@
     <table id="funcionarios_table" class="table table-bordered" style="width:100%">
         <thead>
         <tr>
-            <th width="10px"><center>Matricula</center></th>
+            <th width="10px"><center>Matrícula</center></th>
             <th><center>Nome</center></th>
             <th><center>Instrutor</center></th>
             <th><center>Cargo</center></th>
@@ -212,7 +212,7 @@
          });    
     });
 
-$(document).on('click', '.delete', function(){
+        $(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
         if(confirm("Tem certeza que deseja deletar este funcionário?"))
         {

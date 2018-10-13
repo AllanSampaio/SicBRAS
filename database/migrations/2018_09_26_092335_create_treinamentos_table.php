@@ -14,6 +14,7 @@ class CreateTreinamentosTable extends Migration
     public function up()
     {
         Schema::create('treinamentos', function (Blueprint $table) {
+
             $table->increments('id');
             $table->integer('carga_horaria');
             $table->enum('reciclagem', ['Sim', 'Nao']);
@@ -32,7 +33,6 @@ class CreateTreinamentosTable extends Migration
 
 
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

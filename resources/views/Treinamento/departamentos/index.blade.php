@@ -42,7 +42,7 @@
                     <div class="row">
                             <div class="col-md-4">
                                 <strong>Nome do Novo Departamento:</strong>
-                                <input type="text" name="nome_departamento" class="form-control" placeholder="Digite o nome..." required="ON">
+                                <input type="text" name="nome_departamento" class="form-control" placeholder="Digite o nome..." required="ON" maxlength="80">
                             </div>
                             <div class="col-md-4">
                                 <strong> </strong>
@@ -132,7 +132,7 @@
 
     $(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
-        if(confirm("Tem certeza que deseja deletar este Departamento?"))
+        if(confirm("Tem certeza que deseja deletar este departamento?"))
         {
             $.ajax({
                 url:"{{route('departamento.destroy')}}",

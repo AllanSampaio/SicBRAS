@@ -22,7 +22,7 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>OPS!</strong> Houve um erro na entrada de dados.<br><br>
+            <strong>OPS! </strong> Houve um erro na entrada de dados.<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

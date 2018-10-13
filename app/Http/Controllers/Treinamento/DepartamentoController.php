@@ -32,7 +32,7 @@ class DepartamentoController extends Controller{
         $departamento = Departamento::find($request->input('id'));
         if($departamento->delete())
         {
-            echo 'Departamento deletado com Sucesso';
+            echo 'Departamento deletado com sucesso!';
         }
     }
 
@@ -65,7 +65,7 @@ class DepartamentoController extends Controller{
             $departamento->update($request->all());
 
             return redirect()->route('departamentos.index')
-                    ->with('success', 'Departamento Atualizado com Sucesso!');
+                    ->with('success', 'Departamento atualizado com sucesso!');
     }           
 }
 

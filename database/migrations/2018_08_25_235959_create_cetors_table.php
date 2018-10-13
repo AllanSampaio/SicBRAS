@@ -14,11 +14,11 @@ class CreateCetorsTable extends Migration
     public function up()
     {
         Schema::create('cetors', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->string('nome_cetor');
+            $table->string('nome_cetor',80)->unique();
 
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

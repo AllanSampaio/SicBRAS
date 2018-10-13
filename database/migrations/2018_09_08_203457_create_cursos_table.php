@@ -14,11 +14,11 @@ class CreateCursosTable extends Migration
     public function up()
     {
         Schema::create('cursos', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->string('nome_curso');
+            $table->string('nome_curso',80);
 
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

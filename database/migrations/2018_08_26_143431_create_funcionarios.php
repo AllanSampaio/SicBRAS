@@ -14,11 +14,11 @@ class CreateFuncionarios extends Migration
     public function up()
     {
         Schema::create('funcionarios', function (Blueprint $table) {
+            
             $table->increments('id');
-            $table->string('nome_funcionario');
-            $table->string('instrutor');
-            $table->string('situacao');
-
+            $table->string('nome_funcionario',80);
+            $table->integer('matricula')->unique();
+            
             $table->integer('cargos_id')->unsigned();
             $table->foreign('cargos_id')->references('id')->on('cargos');
             
@@ -28,14 +28,10 @@ class CreateFuncionarios extends Migration
             $table->integer('departamentos_id')->unsigned();
             $table->foreign('departamentos_id')->references('id')->on('departamentos');
 
-
-            $table->integer('matricula')->unique();
-
-
-            
+            $table->string('instrutor');
+            $table->string('situacao');  
 
             $table->softDeletes();
-            
             $table->timestamps();
         });
     }
